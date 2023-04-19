@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.template'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 sourceCompatibility = '17'
 
 configurations {
@@ -19,14 +19,14 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.flywaydb:flyway-core'
-	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.0'
+//	implementation 'org.flywaydb:flyway-core'
+//	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.0'
+//	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor 'org.projectlombok:lombok'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

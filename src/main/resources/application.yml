@@ -1,1 +1,9 @@
+spring:
+  output:
+    ansi:
+      enabled: always
 
+server:
+  name: spring-api-server-async
+  version: 0.0.1
+  formatted-version: v0.0.1

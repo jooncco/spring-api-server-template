@@ -1,4 +1,4 @@
-package com.template.springapiserverasync;
+package com.templates.springapiserverasync;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

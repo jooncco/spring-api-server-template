@@ -5,5 +5,16 @@ spring:
 
 server:
   name: spring-api-server-async
+  port: 8899
   version: 0.0.1
   formatted-version: v0.0.1
+
+logging:
+  level:
+    com.templates.springapiserverasync: TRACE
+  file:
+    max-history: 3
+    max-size: 1MB
+    name: logs/application.log
+  pattern:
+    rolling-file-name: ${LOG_FILE}.%d{yyyy-MM-dd}-%i.log

@@ -63,8 +63,8 @@ You should see `template-s-network` in the list when you type `docker network ls
 ### Persistence Layer
 
 - Flyway Migration Scripts
-  - v0_0_1_1__create_order_table.sql
-  - v0_0_1_2__insert_order_data.sql
+  - V0_0_1_1__create_order_table.sql
+  - V0_0_1_2__insert_order_data.sql
 - MyBatis @Mapper Interface
   - OrderRepository / Order.xml
 - JPA @Repository Interface

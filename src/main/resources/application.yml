@@ -3,6 +3,19 @@ spring:
     ansi:
       enabled: always
 
+  datasource:
+    url: jdbc:mysql://localhost:3306?useSSL=false&allowPublicKeyRetrieval=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: template123!
+  flyway:
+    url: jdbc:mysql://localhost:3306?useSSL=false&allowPublicKeyRetrieval=true
+    schemas: template
+    user: root
+    password: template123!
+    baseline-on-migrate: true
+    out-of-order: true
+
 server:
   name: spring-api-server-async
   port: 8899
@@ -19,3 +32,5 @@ logging:
       max-history: 3
       max-file-size: 1MB
       file-name-pattern: ${LOG_FILE}.%d{yyyy-MM-dd}-%i.log
+  pattern:
+    rolling-file-name: ${LOG_FILE}.%d{yyyy-MM-dd}-%i.log

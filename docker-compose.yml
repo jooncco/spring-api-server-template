@@ -6,8 +6,11 @@ services:
     command:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_bin
+    volumes:
+      - ./src/main/resources/db/initdb.d:/docker-entrypoint-initdb.d
     restart: always
     environment:
+      MYSQL_ROOT_USER: root
       MYSQL_ROOT_PASSWORD: template123!
     ports:
       - 3306:3306

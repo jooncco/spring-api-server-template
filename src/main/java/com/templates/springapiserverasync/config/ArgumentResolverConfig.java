@@ -1,5 +1,7 @@
 package com.templates.springapiserverasync.config;
 
+import static com.templates.springapiserverasync.utility.HttpRequestUtility.getClientIp;
+
 import com.templates.springapiserverasync.sample.dto.ClientInfoDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -11,8 +13,6 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import static com.templates.springapiserverasync.utility.HttpRequestUtility.getClientIp;
-
 @Configuration
 public class ArgumentResolverConfig implements WebMvcConfigurer {
 
@@ -23,22 +23,28 @@ public class ArgumentResolverConfig implements WebMvcConfigurer {
         예) 파라미터 중에 ClientInfo 가 존재하는 경우 resolveArgument 에서 정의한 로직이 동작하여
         ClientInfo 에 clientIP: 100.100.100.100, clientPort: 80 으로 주입시킴
          */
-        argumentResolvers.add(new HandlerMethodArgumentResolver() {
-            /*
-            Return 값이 true 인 경우만 resolveArgument 로직을 탄다.
-             */
-            @Override
-            public boolean supportsParameter(MethodParameter parameter) {
-                return parameter.getParameterType() == ClientInfoDTO.class;
-            }
+        argumentResolvers.add(
+                new HandlerMethodArgumentResolver() {
+                    /*
+                    Return 값이 true 인 경우만 resolveArgument 로직을 탄다.
+                     */
+                    @Override
+                    public boolean supportsParameter(MethodParameter parameter) {
+                        return parameter.getParameterType() == ClientInfoDTO.class;
+                    }
 
-            @Override
-            public Object resolveArgument(MethodParameter parameter,
-                ModelAndViewContainer mavContainer, NativeWebRequest webRequest,
-                WebDataBinderFactory binderFactory) {
-                return ClientInfoDTO.builder().clientIP(getClientIp(
-                    (HttpServletRequest) webRequest.getNativeRequest())).build();
-            }
-        });
+                    @Override
+                    public Object resolveArgument(
+                            MethodParameter parameter,
+                            ModelAndViewContainer mavContainer,
+                            NativeWebRequest webRequest,
+                            WebDataBinderFactory binderFactory) {
+                        return ClientInfoDTO.builder()
+                                .clientIP(
+                                        getClientIp(
+                                                (HttpServletRequest) webRequest.getNativeRequest()))
+                                .build();
+                    }
+                });
     }
 }

@@ -1,6 +1,5 @@
 package com.templates.springapiserverasync.exception;
 
-
 import com.templates.springapiserverasync.constant.BaseStatus;
 
 public class BaseException extends RuntimeException {

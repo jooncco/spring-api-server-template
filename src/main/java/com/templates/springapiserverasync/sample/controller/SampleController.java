@@ -11,6 +11,7 @@ public class SampleController {
     public ClientInfoDTO apiClientInfo(ClientInfoDTO clientInfoDTO) {
         return clientInfoDTO;
     }
+
     @GetMapping({"/api/a", "/api/b"})
     public String apiTest() {
         return "API TEST";

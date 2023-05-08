@@ -29,25 +29,31 @@ public class BaseFilter implements Filter {
     예) request 의 header 에서 필수 헤더가 없는 경우 요청을 차단할 수 있다.
      */
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
-        FilterChain filterChain) throws IOException, ServletException {
+    public void doFilter(
+            ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
+            throws IOException, ServletException {
         log.info("==========BaseFilter 시작!==========");
         HttpServletRequest request = (HttpServletRequest) servletRequest;
 
         // 필수 헤더
         List<String> requiredHeaders = List.of("Content-Type");
-        boolean valid = requiredHeaders.stream().allMatch(x->{
-            for (Enumeration<?> e = request.getHeaderNames(); e.hasMoreElements();) {
-                String nextHeaderName = (String) e.nextElement();
-                if(x.equalsIgnoreCase(nextHeaderName)) {
-                    return true;
-                }
-            }
-            return false;
-        });
+        boolean valid =
+                requiredHeaders.stream()
+                        .allMatch(
+                                x -> {
+                                    for (Enumeration<?> e = request.getHeaderNames();
+                                            e.hasMoreElements(); ) {
+                                        String nextHeaderName = (String) e.nextElement();
+                                        if (x.equalsIgnoreCase(nextHeaderName)) {
+                                            return true;
+                                        }
+                                    }
+                                    return false;
+                                });
         if (!valid) {
             log.info("==========필수 헤더 검증에 실패하여 요청 차단!==========");
-            setErrorResponse(BaseStatus.INVALID_REQUIRED_HEADER, (HttpServletResponse) servletResponse);
+            setErrorResponse(
+                    BaseStatus.INVALID_REQUIRED_HEADER, (HttpServletResponse) servletResponse);
             return;
         }
 
@@ -64,8 +70,11 @@ public class BaseFilter implements Filter {
     private void setErrorResponse(BaseStatus baseStatus, HttpServletResponse response) {
         response.setStatus(baseStatus.getStatus());
         response.setContentType("application/json");
-        ErrorResponse errorResponse = ErrorResponse.builder().error(baseStatus.getCode()).msg(
-            baseStatus.getMessage()).build();
+        ErrorResponse errorResponse =
+                ErrorResponse.builder()
+                        .error(baseStatus.getCode())
+                        .msg(baseStatus.getMessage())
+                        .build();
         try {
             Gson gson = new Gson();
             String json = gson.toJson(errorResponse);
@@ -74,5 +83,4 @@ public class BaseFilter implements Filter {
             e.printStackTrace();
         }
     }
-
 }

@@ -8,6 +8,7 @@ import lombok.Builder;
 public class ErrorResponse {
     private String error;
     private String msg;
+
     @JsonInclude(Include.NON_NULL)
     private String uri;
 }

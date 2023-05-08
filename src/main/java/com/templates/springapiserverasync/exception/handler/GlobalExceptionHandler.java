@@ -18,8 +18,11 @@ Handler 에 등록한 Exception 발생시 메서드가 호출된다.
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler({MethodArgumentNotValidException.class,
-        MissingServletRequestParameterException.class, HttpMessageNotReadableException.class})
+    @ExceptionHandler({
+        MethodArgumentNotValidException.class,
+        MissingServletRequestParameterException.class,
+        HttpMessageNotReadableException.class
+    })
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     protected ErrorResponse baseRequest(Exception ex, HttpServletRequest request) {
         String uri = null;
@@ -27,14 +30,20 @@ public class GlobalExceptionHandler {
             uri = "PARAM_ME : ".concat(request.getRequestURI());
         }
 
-        return ErrorResponse.builder().error(ex.getClass().getName()).msg(ex.getMessage()).uri(uri).build();
-
+        return ErrorResponse.builder()
+                .error(ex.getClass().getName())
+                .msg(ex.getMessage())
+                .uri(uri)
+                .build();
     }
 
     @ExceptionHandler({Exception.class, BaseException.class})
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     protected ErrorResponse internalServerError(Exception ex, HttpServletRequest request) {
-        return ErrorResponse.builder().error(ex.getClass().getName()).msg(ex.getMessage()).uri(request.getRequestURI()).build();
+        return ErrorResponse.builder()
+                .error(ex.getClass().getName())
+                .msg(ex.getMessage())
+                .uri(request.getRequestURI())
+                .build();
     }
-
 }

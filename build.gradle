@@ -1,7 +1,8 @@
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.0.5'
-	id 'io.spring.dependency-management' version '1.1.0'
+  id 'java'
+  id 'org.springframework.boot' version '3.0.5'
+  id 'io.spring.dependency-management' version '1.1.0'
+  id 'com.diffplug.spotless' version '6.11.0'
 }
 
 group = 'com.template'
@@ -9,29 +10,52 @@ version = '0.0.1'
 sourceCompatibility = '17'
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+  compileOnly {
+    extendsFrom annotationProcessor
+  }
 }
 
 repositories {
-	mavenCentral()
+  mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-aop'
+  implementation 'org.springframework.boot:spring-boot-starter-web'
+  implementation 'org.springframework.boot:spring-boot-starter-aop'
     implementation 'com.google.code.gson:gson:2.10.1'
 //	implementation 'org.flywaydb:flyway-core'
 //	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.0'
 //	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+  compileOnly 'org.projectlombok:lombok'
+  annotationProcessor 'org.projectlombok:lombok'
+  annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+  developmentOnly 'org.springframework.boot:spring-boot-devtools'
+  testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+spotless {
+  java {
+    target 'src/**/*.java'
+    importOrder 'java', 'javax', 'org', 'com', ''
+    removeUnusedImports()
+    googleJavaFormat('1.15.0').aosp()
+    indentWithSpaces(4)
+    trimTrailingWhitespace()
+    endWithNewline()
+  }
+  format 'misc', {
+    target '**/*.yml', '**/*.gradle', '**/*.md', '**/.gitignore'
+    indentWithSpaces(2)
+    trimTrailingWhitespace()
+    endWithNewline()
+  }
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+  useJUnitPlatform()
+}
+
+build {
+  dependsOn 'spotlessApply'
+  dependsOn 'test'
 }

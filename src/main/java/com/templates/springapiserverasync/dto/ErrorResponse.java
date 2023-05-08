@@ -1,4 +1,4 @@
-package com.templates.springapiserverasync.constant;
+package com.templates.springapiserverasync.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;

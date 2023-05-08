@@ -2,7 +2,7 @@ package com.templates.springapiserverasync.filter;
 
 import com.google.gson.Gson;
 import com.templates.springapiserverasync.constant.BaseStatus;
-import com.templates.springapiserverasync.constant.ErrorResponse;
+import com.templates.springapiserverasync.dto.ErrorResponse;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.FilterConfig;

@@ -1,6 +1,6 @@
 package com.templates.springapiserverasync.config;
 
-import com.templates.springapiserverasync.constant.ClientInfo;
+import com.templates.springapiserverasync.sample.dto.ClientInfoDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +10,8 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import static com.templates.springapiserverasync.utility.HttpRequestUtility.getClientIp;
 
 @Configuration
 public class ArgumentResolverConfig implements WebMvcConfigurer {
@@ -27,24 +29,15 @@ public class ArgumentResolverConfig implements WebMvcConfigurer {
              */
             @Override
             public boolean supportsParameter(MethodParameter parameter) {
-                if (parameter.getParameterType() == ClientInfo.class) {
-                    return true;
-                }
-                return false;
+                return parameter.getParameterType() == ClientInfoDTO.class;
             }
 
             @Override
             public Object resolveArgument(MethodParameter parameter,
                 ModelAndViewContainer mavContainer, NativeWebRequest webRequest,
                 WebDataBinderFactory binderFactory) {
-                return ClientInfo.builder().clientIP(getClientIp(
+                return ClientInfoDTO.builder().clientIP(getClientIp(
                     (HttpServletRequest) webRequest.getNativeRequest())).build();
-            }
-
-            private String getClientIp(HttpServletRequest req) {
-                String ip = req.getHeader("X-Forwarded-For");
-                if (ip == null) ip = req.getRemoteAddr();
-                return ip;
             }
         });
     }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Aspect
 @Slf4j
-public class AspectComponent {
+public class SampleAspect {
 
     @Around("execution(* com.templates.springapiserverasync..*.HealthController.*(..))")
     public Object callTest(ProceedingJoinPoint pjp) throws Throwable {

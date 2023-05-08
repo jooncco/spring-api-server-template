@@ -1,15 +1,15 @@
-package com.templates.springapiserverasync.rest.sample;
+package com.templates.springapiserverasync.sample.controller;
 
-import com.templates.springapiserverasync.constant.ClientInfo;
+import com.templates.springapiserverasync.sample.dto.ClientInfoDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class ApiTestController {
+public class SampleController {
 
     @GetMapping("/api/clientInfo")
-    public ClientInfo apiClientInfo(ClientInfo clientInfo) {
-        return clientInfo;
+    public ClientInfoDTO apiClientInfo(ClientInfoDTO clientInfoDTO) {
+        return clientInfoDTO;
     }
     @GetMapping({"/api/a", "/api/b"})
     public String apiTest() {

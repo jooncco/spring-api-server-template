@@ -1,6 +1,6 @@
-package com.templates.springapiserverasync.handler;
+package com.templates.springapiserverasync.exception.handler;
 
-import com.templates.springapiserverasync.constant.ErrorResponse;
+import com.templates.springapiserverasync.dto.ErrorResponse;
 import com.templates.springapiserverasync.exception.BaseException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -16,7 +16,7 @@ RestController 에서 발생하는 Exception 을 중앙 제어한다.
 Handler 에 등록한 Exception 발생시 메서드가 호출된다.
  */
 @RestControllerAdvice
-public class ExceptionAdvise {
+public class GlobalExceptionHandler {
 
     @ExceptionHandler({MethodArgumentNotValidException.class,
         MissingServletRequestParameterException.class, HttpMessageNotReadableException.class})

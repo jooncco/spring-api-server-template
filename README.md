@@ -1,5 +1,6 @@
 # spring-api-server-template-async
-🐬 Spring api server example.
+🐬 Spring api server example.  
+Provides opinionated view on server with sample code, showing best practices in real-world back-end micro services.
 
 ## Get Started
 
@@ -8,11 +9,14 @@
 1. Install Docker
 
 Our sample api server connects to local MySql DB, which runs inside the docker container environment.  
-Make sure [Docker Desktop](https://docs.docker.com/engine/install/) is installed in your local PC.
+Make sure [Docker Desktop](https://docs.docker.com/engine/install/) is installed in your local environment.
+```shell
+docker ps
+```
 
 Possible alternative: [Rancher Desktop](https://docs.rancherdesktop.io/getting-started/installation/)  
 
-2. Create Docker Network
+3. Create Docker Network
 
 ```shell
 docker network create template-s-network
@@ -66,15 +70,15 @@ You should see `template-s-network` in the list when you type `docker network ls
 - JPA @Repository Interface
   - OrderRepository
 
-### API Client (Open Feign)
+### Etc.
 
-- PaymentApi
-- MemberApi
-
-### Mock Servers
-
-- Payment Service Mock
-- Member Service Mock
+- API Client (Open Feign)
+  - PaymentApi
+  - MemberApi
+- Mock Servers
+  - Payment Service Mock
+  - Member Service Mock
+- DTO Mappers
 
 ## Stack
 

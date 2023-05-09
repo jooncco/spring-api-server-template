@@ -4,7 +4,7 @@ spring:
       enabled: always
 
   datasource:
-    url: jdbc:mysql://localhost:3306?useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/template?useSSL=false&allowPublicKeyRetrieval=true
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: template123!
@@ -15,6 +15,10 @@ spring:
     password: template123!
     baseline-on-migrate: true
     out-of-order: true
+
+mybatis:
+  type-aliases-package: com.templates.springapiserverasync.**.dto
+  mapper-locations: classpath:sql/*.xml
 
 server:
   name: spring-api-server-async

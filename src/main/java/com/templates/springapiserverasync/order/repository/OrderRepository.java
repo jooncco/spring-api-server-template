@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface OrderRepository {
     Order getOrder(String id);
 
-    List<Order> getOrders();
+    List<Order> getOrders(String userId);
 
     int insertOrder(Order order);
 

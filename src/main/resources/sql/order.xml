@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.templates.springapiserverasync.order.repository.OrderRepository">
+    <select id="getOrders" parameterType="String" resultType="Order">
+        <![CDATA[
+            SELECT ORDER_NO, MEMBER_NO, ORDER_STATUS, ORDER_TOTAL, DELIVERY_FEE, CRT_DATE
+            FROM `ORDER`
+            WHERE MEMBER_NO = #{userId}
+        ]]>
+    </select>
+</mapper>

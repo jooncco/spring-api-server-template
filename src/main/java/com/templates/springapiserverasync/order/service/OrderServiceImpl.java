@@ -3,12 +3,15 @@ package com.templates.springapiserverasync.order.service;
 import com.templates.springapiserverasync.order.dto.Order;
 import com.templates.springapiserverasync.order.repository.OrderRepository;
 import java.util.List;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
-    OrderRepository orderRepository;
+    private final OrderRepository orderRepository;
 
     @Override
     public Order getOrder(String id) {
@@ -16,8 +19,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getOrders() {
-        return orderRepository.getOrders();
+    public List<Order> getOrders(String userId) {
+        return orderRepository.getOrders(userId);
     }
 
     @Override

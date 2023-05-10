@@ -26,7 +26,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<GetOrdersDTO> getOrders(Integer memberId) {
         List<Order> orders = orderRepository.getOrders(memberId);
-
         return orders.stream().map(orderDTOMapper).toList();
     }
 

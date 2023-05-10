@@ -81,6 +81,10 @@ You should see `template-s-network` in the list when you type `docker network ls
   - Member Service Mock
 - DTO Mappers
 
+## Test
+
+Swagger UI: http://localhost:9001/swagger-ui/index.html
+
 ## Stack
 
 - Spring Boot: spring-boot-starter-web v3.0.5

@@ -81,13 +81,13 @@ You should see `template-s-network` in the list when you type `docker network ls
   - Member Service Mock
 - DTO Mappers
 
-## Test
+## Test (Local)
 
 Swagger UI: http://localhost:9001/swagger-ui/index.html
 
 ## Stack
 
-- Spring Boot: spring-boot-starter-web v3.0.5
+- Spring Boot: spring-boot-starter-web v2.7.11
 - Lombok: v1.18.26
 - Flyway
 - MyBatis

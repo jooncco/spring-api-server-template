@@ -8,4 +8,4 @@ ${AnsiColor.BRIGHT_CYAN}
  #+#     #+#        #+#       #+# #+#        #+#        #+#     #+# #+#     #+#                     #+#    #+#
 ###     ########## ###       ### ###        ########## ###     ### ###     ##########               ########
 
-                                                                             ${AnsiColor.BRIGHT_MAGENTA}${server.name} ${server.formatted-version}${AnsiColor.DEFAULT}
+                                                                         ${AnsiColor.BRIGHT_MAGENTA}${server.name} ${server.formatted-version}${AnsiColor.DEFAULT}

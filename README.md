@@ -1,4 +1,4 @@
-# spring-api-server-template-async
+# spring-api-server-template
 🐬 Spring api server example.
 Provides opinionated view on server with sample code, showing best practices in real-world back-end micro services.
 

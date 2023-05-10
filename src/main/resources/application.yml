@@ -19,20 +19,20 @@ spring:
       enabled: always
 
 mybatis:
-  type-aliases-package: com.templates.springapiserverasync.**.model
+  type-aliases-package: com.templates.springapiserver.**.model
   mapper-locations: classpath:sql/*.xml
   configuration:
     map-underscore-to-camel-case: true
 
 server:
-  name: spring-api-server-async
+  name: spring-api-server-template
   port: 9001
   version: 0.0.1
   formatted-version: v0.0.1
 
 logging:
   level:
-    com.templates.springapiserverasync: TRACE
+    com.templates.springapiserver: TRACE
   file:
     name: logs/application.log
   logback:

@@ -16,9 +16,9 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderDTOMapper orderDTOMapper;
 
+    // TODO: define getOrderDTO and use it here.
     @Override
     public GetOrdersDTO getOrder(Integer orderId) {
-
         // TODO: implement get order api.
         return null;
     }
@@ -29,11 +29,12 @@ public class OrderServiceImpl implements OrderService {
         return orders.stream().map(orderDTOMapper).toList();
     }
 
+    // TODO: define createOrderDTO and use it here.
     @Override
-    public int createOrder(GetOrdersDTO orderDTO) {
+    public int createOrder(GetOrdersDTO createOrderDTO) {
         // TODO: implement createOrder service.
         // 가게 오픈시마다 초기화되는 주문번호 채번 로직을 구성해보면 좋겠죠?
-        return orderRepository.insertOrder(orderDTO);
+        return orderRepository.insertOrder(createOrderDTO);
     }
 
     // TODO: define updateOrderDTO and use it here.

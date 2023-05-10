@@ -37,6 +37,10 @@ public class GlobalExceptionHandler {
                 .build();
     }
 
+    // TODO: 500 error handler
+    // Failure in @ExceptionHandler
+    // com.templates.springapiserverasync.exception.handler.GlobalExceptionHandler#internalServerError(Exception, HttpServletRequest
+
     @ExceptionHandler({Exception.class, BaseException.class})
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     protected ErrorResponse internalServerError(Exception ex, HttpServletRequest request) {

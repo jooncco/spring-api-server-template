@@ -1,16 +1,16 @@
 package com.templates.springapiserverasync.order.service;
 
-import com.templates.springapiserverasync.order.dto.Order;
+import com.templates.springapiserverasync.order.dto.res.GetOrdersDTO;
 import java.util.List;
 
 public interface OrderService {
-    Order getOrder(String id);
+    GetOrdersDTO getOrder(Integer orderId);
 
-    List<Order> getOrders(String userId);
+    List<GetOrdersDTO> getOrders(Integer memberId);
 
-    int insertOrder(Order order);
+    int createOrder(GetOrdersDTO orderDTO);
 
-    Order updateOrder(String id, Order order);
+    int updateOrder(Integer orderId, GetOrdersDTO orderDTO);
 
-    int deleteOrder(String id);
+    int deleteOrder(Integer orderId);
 }

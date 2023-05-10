@@ -1,18 +1,21 @@
 package com.templates.springapiserverasync.order.repository;
 
-import com.templates.springapiserverasync.order.dto.Order;
+import com.templates.springapiserverasync.order.dto.res.GetOrdersDTO;
+import com.templates.springapiserverasync.order.model.Order;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface OrderRepository {
-    Order getOrder(String id);
+    Order getOrder(Integer orderId);
 
-    List<Order> getOrders(String userId);
+    List<Order> getOrders(Integer memberId);
 
-    int insertOrder(Order order);
+    // TODO: define CreateOrderReqDTO and use it here.
+    int insertOrder(GetOrdersDTO orderDTO);
 
-    Order updateOrder(String id, Order order);
+    // TODO: define UpdateOrderReqDTO and use it here.
+    int updateOrder(Integer orderId, GetOrdersDTO orderDTO);
 
-    int deleteOrder(String id);
+    int deleteOrder(Integer orderId);
 }

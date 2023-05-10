@@ -40,10 +40,11 @@ You should see `template-s-network` in the list when you type `docker network ls
 
 ### REST APIs
 
-- `GET` /orders
 - `POST` /order
-- `PUT` /order
-- `DELETE` /order
+- `GET` /order/{id}
+- `PUT` /order/{id}
+- `DELETE` /order/{id}
+- `GET` /orders
 
 ### Aspects
 
@@ -63,8 +64,8 @@ You should see `template-s-network` in the list when you type `docker network ls
 ### Persistence Layer
 
 - Flyway Migration Scripts
-  - V0_0_1_1__create_order_table.sql
-  - V0_0_1_2__insert_order_data.sql
+  - V0_0_1_0__create_order_table.sql
+  - V0_0_1_100__insert_order_test_data.sql
 - MyBatis @Mapper Interface
   - OrderRepository / Order.xml
 - JPA @Repository Interface

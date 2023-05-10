@@ -1,9 +1,10 @@
 package com.templates.springapiserverasync.order.service;
 
-import com.templates.springapiserverasync.order.dto.Order;
+import com.templates.springapiserverasync.order.dto.mapper.OrderDTOMapper;
+import com.templates.springapiserverasync.order.dto.res.GetOrdersDTO;
+import com.templates.springapiserverasync.order.model.Order;
 import com.templates.springapiserverasync.order.repository.OrderRepository;
 import java.util.List;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,28 +14,39 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
 
+    private final OrderDTOMapper orderDTOMapper;
+
     @Override
-    public Order getOrder(String id) {
-        return orderRepository.getOrder(id);
+    public GetOrdersDTO getOrder(Integer orderId) {
+
+        // TODO: implement get order api.
+        return null;
     }
 
     @Override
-    public List<Order> getOrders(String userId) {
-        return orderRepository.getOrders(userId);
+    public List<GetOrdersDTO> getOrders(Integer memberId) {
+        List<Order> orders = orderRepository.getOrders(memberId);
+
+        return orders.stream().map(orderDTOMapper).toList();
     }
 
     @Override
-    public int insertOrder(Order order) {
-        return orderRepository.insertOrder(order);
+    public int createOrder(GetOrdersDTO orderDTO) {
+        // TODO: implement createOrder service.
+        // 가게 오픈시마다 초기화되는 주문번호 채번 로직을 구성해보면 좋겠죠?
+        return orderRepository.insertOrder(orderDTO);
+    }
+
+    // TODO: define updateOrderDTO and use it here.
+    @Override
+    public int updateOrder(Integer orderId, GetOrdersDTO orderDTO) {
+        // TODO: implement update order api.
+        return 0;
     }
 
     @Override
-    public Order updateOrder(String id, Order order) {
-        return orderRepository.updateOrder(id, order);
-    }
-
-    @Override
-    public int deleteOrder(String id) {
-        return orderRepository.deleteOrder(id);
+    public int deleteOrder(Integer orderId) {
+        // TODO: implement delete order api.
+        return orderRepository.deleteOrder(orderId);
     }
 }

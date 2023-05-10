@@ -2,9 +2,9 @@ package com.templates.springapiserverasync.config;
 
 import static com.templates.springapiserverasync.utility.HttpRequestUtility.getClientIp;
 
-import com.templates.springapiserverasync.sample.dto.ClientInfoDTO;
-import jakarta.servlet.http.HttpServletRequest;
+import com.templates.springapiserverasync.sample.dto.res.ClientInfoDTO;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;

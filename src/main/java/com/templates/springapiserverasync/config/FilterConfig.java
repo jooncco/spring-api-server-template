@@ -16,7 +16,7 @@ public class FilterConfig {
     public FilterRegistrationBean firstFilterRegister() {
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();
         registrationBean.setFilter(new BaseFilter());
-        registrationBean.setUrlPatterns(Collections.singleton("/*"));
+        registrationBean.setUrlPatterns(Collections.singleton("/api/**"));
         return registrationBean;
     }
 }

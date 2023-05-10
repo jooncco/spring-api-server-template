@@ -1,28 +1,32 @@
 spring:
-  output:
-    ansi:
-      enabled: always
-
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   datasource:
-    url: jdbc:mysql://localhost:3306/template?useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/order_master?useSSL=false&allowPublicKeyRetrieval=true
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: template123!
   flyway:
     url: jdbc:mysql://localhost:3306?useSSL=false&allowPublicKeyRetrieval=true
-    schemas: template
+    schemas: order_master
     user: root
     password: template123!
     baseline-on-migrate: true
     out-of-order: true
+  output:
+    ansi:
+      enabled: always
 
 mybatis:
-  type-aliases-package: com.templates.springapiserverasync.**.dto
+  type-aliases-package: com.templates.springapiserverasync.**.model
   mapper-locations: classpath:sql/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
 
 server:
   name: spring-api-server-async
-  port: 8899
+  port: 9001
   version: 0.0.1
   formatted-version: v0.0.1
 

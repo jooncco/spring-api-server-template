@@ -1,6 +1,6 @@
 package com.templates.springapiserverasync.sample.controller;
 
-import com.templates.springapiserverasync.sample.dto.ClientInfoDTO;
+import com.templates.springapiserverasync.sample.dto.res.ClientInfoDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

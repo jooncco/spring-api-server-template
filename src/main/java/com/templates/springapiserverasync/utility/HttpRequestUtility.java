@@ -1,6 +1,6 @@
 package com.templates.springapiserverasync.utility;
 
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass

@@ -2,7 +2,7 @@ package com.templates.springapiserverasync.exception.handler;
 
 import com.templates.springapiserverasync.dto.ErrorResponse;
 import com.templates.springapiserverasync.exception.BaseException;
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;

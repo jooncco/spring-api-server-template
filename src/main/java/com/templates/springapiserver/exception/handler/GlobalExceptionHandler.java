@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-/*
-RestController 에서 발생하는 Exception 을 중앙 제어한다.
-Handler 에 등록한 Exception 발생시 메서드가 호출된다.
- */
+/** RestController 에서 발생하는 Exception 을 중앙 제어한다. Handler 에 등록한 Exception 발생시 메서드가 호출된다. */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 

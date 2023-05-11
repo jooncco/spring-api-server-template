@@ -6,7 +6,7 @@ import java.util.function.Function;
 import org.springframework.stereotype.Component;
 
 @Component
-public class OrderDTOMapper implements Function<Order, GetOrdersDTO> {
+public class GetOrdersDTOMapper implements Function<Order, GetOrdersDTO> {
 
     @Override
     public GetOrdersDTO apply(Order order) {

@@ -12,7 +12,6 @@ spring:
     schemas: order_master
     user: root
     password: template123!
-    baseline-on-migrate: true
     out-of-order: true
   output:
     ansi:

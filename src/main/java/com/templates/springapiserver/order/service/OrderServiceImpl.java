@@ -1,6 +1,6 @@
 package com.templates.springapiserver.order.service;
 
-import com.templates.springapiserver.order.dto.mapper.OrderDTOMapper;
+import com.templates.springapiserver.order.dto.mapper.GetOrdersDTOMapper;
 import com.templates.springapiserver.order.dto.res.GetOrdersDTO;
 import com.templates.springapiserver.order.model.Order;
 import com.templates.springapiserver.order.repository.OrderRepository;
@@ -14,7 +14,7 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
 
-    private final OrderDTOMapper orderDTOMapper;
+    private final GetOrdersDTOMapper orderDTOMapper;
 
     // TODO: define getOrderDTO and use it here.
     @Override

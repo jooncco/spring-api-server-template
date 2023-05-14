@@ -4,12 +4,79 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.templates.springapiserver.order.repository.OrderRepository">
+    <select id="getOrder" parameterType="int" resultType="Order">
+    <![CDATA[
+        SELECT  ORDER_ID,
+                MEMBER_ID,
+                ORDER_NO,
+                ORDER_TYPE_CODE,
+                ORDER_STATUS_CODE,
+                ITEM_TOTAL_AMOUNT,
+                DELIVERY_FEE_AMOUNT,
+                ORDER_TOTAL_AMOUNT,
+                CREATED_DATE_TIME,
+                CREATED_BY,
+                UPDATED_DATE_TIME,
+                UPDATED_BY
+          FROM  `ORDER`
+         WHERE  ORDER_ID = #{orderId};
+        ]]>
+    </select>
+
     <select id="getOrders" parameterType="int" resultType="Order">
     <![CDATA[
-        SELECT  ORDER_ID, MEMBER_ID, ORDER_NO, ORDER_TYPE_CODE, ORDER_STATUS_CODE, ITEM_TOTAL_AMOUNT,
-                DELIVERY_FEE_AMOUNT, ORDER_TOTAL_AMOUNT, CREATED_DATE_TIME, CREATED_BY, UPDATED_DATE_TIME, UPDATED_BY
+        SELECT  ORDER_ID,
+                MEMBER_ID,
+                ORDER_NO,
+                ORDER_TYPE_CODE,
+                ORDER_STATUS_CODE,
+                ITEM_TOTAL_AMOUNT,
+                DELIVERY_FEE_AMOUNT,
+                ORDER_TOTAL_AMOUNT,
+                CREATED_DATE_TIME,
+                CREATED_BY,
+                UPDATED_DATE_TIME,
+                UPDATED_BY
           FROM  `ORDER`
          WHERE  MEMBER_ID = #{memberId}
     ]]>
     </select>
+
+    <insert id="insertOrder" parameterType="Order">
+        <![CDATA[
+        INSERT INTO `ORDER` (MEMBER_ID, ORDER_NO, ORDER_TYPE_CODE, ORDER_STATUS_CODE, ITEM_TOTAL_AMOUNT,
+                             DELIVERY_FEE_AMOUNT, ORDER_TOTAL_AMOUNT, CREATED_BY, UPDATED_BY)
+        VALUES (#{memberId},
+                #{orderNo},
+                #{orderTypeCode},
+                #{orderStatusCode},
+                #{itemTotalAmount},
+                #{deliveryFeeAmount},
+                #{orderTotalAmount},
+                #{createdBy},
+                #{updatedBy})
+        ]]>
+    </insert>
+
+    <insert id="deleteOrder" parameterType="Integer" >
+        <![CDATA[
+        DELETE FROM `ORDER` WHERE ORDER_ID=#{orderId}
+        ]]>
+    </insert>
+
+    <update id="updateOrder" parameterType="Order">
+        <![CDATA[
+        UPDATE `ORDER`
+           SET MEMBER_ID=#{memberId},
+               ORDER_NO=#{orderNo},
+               ORDER_TYPE_CODE=#{orderTypeCode},
+               ORDER_STATUS_CODE=#{orderStatusCode},
+               ITEM_TOTAL_AMOUNT=#{itemTotalAmount},
+               DELIVERY_FEE_AMOUNT=#{deliveryFeeAmount},
+               ORDER_TOTAL_AMOUNT=#{orderTotalAmount},
+               UPDATED_BY=#{updatedBy},
+               UPDATED_DATE_TIME=#{updatedDateTime}
+         WHERE ORDER_ID=#{orderId}
+        ]]>
+    </update>
 </mapper>

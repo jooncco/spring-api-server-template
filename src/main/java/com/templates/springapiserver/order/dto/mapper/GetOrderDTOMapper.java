@@ -1,16 +1,16 @@
 package com.templates.springapiserver.order.dto.mapper;
 
-import com.templates.springapiserver.order.dto.res.GetOrdersDTO;
+import com.templates.springapiserver.order.dto.res.GetOrderDTO;
 import com.templates.springapiserver.order.model.Order;
 import java.util.function.Function;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GetOrdersDTOMapper implements Function<Order, GetOrdersDTO> {
+public class GetOrderDTOMapper implements Function<Order, GetOrderDTO> {
 
     @Override
-    public GetOrdersDTO apply(Order order) {
-        return GetOrdersDTO.builder()
+    public GetOrderDTO apply(Order order) {
+        return GetOrderDTO.builder()
                 .memberId(order.getMemberId())
                 .orderNo(order.getOrderNo())
                 .type(order.getOrderTypeCode())

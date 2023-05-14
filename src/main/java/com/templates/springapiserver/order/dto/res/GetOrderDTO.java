@@ -13,7 +13,7 @@ import lombok.ToString;
 @Builder
 @ToString
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class GetOrdersDTO {
+public class GetOrderDTO {
     private int memberId;
     private int orderNo;
     private String type;

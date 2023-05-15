@@ -7,13 +7,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SampleController {
 
-    @GetMapping("/api/clientInfo")
+    /*
+    clientInfoDTO를 파라미터로 받을 경우 ArgumentResolver에서 주입시켜 줌
+     */
+    @GetMapping("/api/client-info")
     public ClientInfoDTO apiClientInfo(ClientInfoDTO clientInfoDTO) {
         return clientInfoDTO;
-    }
-
-    @GetMapping({"/api/a", "/api/b"})
-    public String apiTest() {
-        return "API TEST";
     }
 }

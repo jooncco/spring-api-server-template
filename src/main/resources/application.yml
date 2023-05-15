@@ -1,5 +1,9 @@
 spring:
+  web:
+    resources:
+      add-mappings: false
   mvc:
+    throw-exception-if-no-handler-found: true # for 404 error exception
     pathmatch:
       matching-strategy: ant_path_matcher
   datasource:
@@ -28,6 +32,9 @@ server:
   port: 9001
   version: 0.0.1
   formatted-version: v0.0.1
+  error:
+    whitelabel:
+      enabled: false # true 인 경우에는 /error 로 redirect 됨
 
 logging:
   level:
@@ -36,8 +43,8 @@ logging:
     name: logs/application.log
   logback:
     rollingpolicy:
-      max-history: 3
-      max-file-size: 1MB
+      max-history: 3 # 파일 최대 저장 개수
+      max-file-size: 1MB # 파일 크기
       file-name-pattern: ${LOG_FILE}.%d{yyyy-MM-dd}-%i.log
   pattern:
     rolling-file-name: ${LOG_FILE}.%d{yyyy-MM-dd}-%i.log

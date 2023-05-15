@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 spring:
   web:
     resources:
@@ -6,17 +7,20 @@ spring:
     throw-exception-if-no-handler-found: true # for 404 error exception
     pathmatch:
       matching-strategy: ant_path_matcher
+
   datasource:
     url: jdbc:mysql://localhost:3306/order_master?useSSL=false&allowPublicKeyRetrieval=true
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: template123!
-  flyway:
+
+  flyway: # flyway Configuration - https://flywaydb.org/documentation/configuration/parameters/
     url: jdbc:mysql://localhost:3306?useSSL=false&allowPublicKeyRetrieval=true
-    schemas: order_master
+    schemas: order_master # 사용할 스키마, 없을 경우, 생성한다.
     user: root
     password: template123!
-    out-of-order: true
+    out-of-order: true # migration이 순서 상관 없이 실행될 수 있다.
+
   output:
     ansi:
       enabled: always
@@ -48,3 +52,4 @@ logging:
       file-name-pattern: ${LOG_FILE}.%d{yyyy-MM-dd}-%i.log
   pattern:
     rolling-file-name: ${LOG_FILE}.%d{yyyy-MM-dd}-%i.log
+

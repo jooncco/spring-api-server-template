@@ -11,4 +11,9 @@ public class BaseModel {
     private Integer createdBy;
     @Setter private LocalDateTime updatedDateTime;
     @Setter private Integer updatedBy;
+
+    public BaseModel(Integer createdBy, Integer updatedBy) {
+        this.createdBy = createdBy;
+        this.updatedBy = updatedBy;
+    }
 }

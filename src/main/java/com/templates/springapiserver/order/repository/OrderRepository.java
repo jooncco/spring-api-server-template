@@ -1,21 +1,21 @@
 package com.templates.springapiserver.order.repository;
 
-import com.templates.springapiserver.order.dto.res.GetOrdersDTO;
 import com.templates.springapiserver.order.model.Order;
 import java.util.List;
+import java.util.Optional;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface OrderRepository {
-    Order getOrder(Integer orderId);
+    Optional<Order> getOrder(Integer orderId);
 
     List<Order> getOrders(Integer memberId);
 
     // TODO: define CreateOrderReqDTO and use it here.
-    int insertOrder(GetOrdersDTO orderDTO);
+    int insertOrder(Order order);
 
     // TODO: define UpdateOrderReqDTO and use it here.
-    int updateOrder(Integer orderId, GetOrdersDTO orderDTO);
+    int updateOrder(Order Order);
 
     int deleteOrder(Integer orderId);
 }

@@ -15,3 +15,5 @@ CREATE TABLE `ORDER`
     `UPDATED_BY` INT UNSIGNED NULL COMMENT '수정자 ID',
     PRIMARY KEY(`ORDER_ID`)
 ) COMMENT = '주문';
+
+-- flyway naming rule - https://flywaydb.org/documentation/concepts/migrations#naming-1

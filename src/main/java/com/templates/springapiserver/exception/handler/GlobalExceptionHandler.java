@@ -19,15 +19,28 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({
         MethodArgumentNotValidException.class,
         MissingServletRequestParameterException.class,
-        HttpMessageNotReadableException.class,
-        NoHandlerFoundException.class
+        HttpMessageNotReadableException.class
     })
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    protected ErrorResponse baseRequest(Exception ex, HttpServletRequest request) {
+    protected ErrorResponse badRequest(Exception ex, HttpServletRequest request) {
         String uri = null;
         if (ex instanceof MethodArgumentNotValidException) {
             uri = "PARAM_ME : ".concat(request.getRequestURI());
         }
+
+        return ErrorResponse.builder()
+            .error(ex.getClass().getName())
+            .msg(ex.getMessage())
+            .uri(uri)
+            .build();
+    }
+
+    @ExceptionHandler({
+        NoHandlerFoundException.class
+    })
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    protected ErrorResponse notFoundError(Exception ex, HttpServletRequest request) {
+        String uri = "NOT FOUND : ".concat(request.getRequestURI());
 
         return ErrorResponse.builder()
                 .error(ex.getClass().getName())

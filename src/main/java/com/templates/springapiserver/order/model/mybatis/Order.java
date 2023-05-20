@@ -1,7 +1,7 @@
 package com.templates.springapiserver.order.model.mybatis;
 
-import com.templates.springapiserver.constant.OrderStatus;
 import com.templates.springapiserver.model.BaseModel;
+import com.templates.springapiserver.order.constant.OrderStatus;
 import com.templates.springapiserver.order.dto.req.CreateOrderReqDTO;
 import lombok.Builder;
 import lombok.Getter;

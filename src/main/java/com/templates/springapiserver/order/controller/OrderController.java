@@ -4,6 +4,7 @@ import com.templates.springapiserver.order.dto.req.CreateOrderReqDTO;
 import com.templates.springapiserver.order.dto.req.UpdateOrderReqDTO;
 import com.templates.springapiserver.order.dto.res.CreateOrderResDTO;
 import com.templates.springapiserver.order.dto.res.GetOrderResDTO;
+import com.templates.springapiserver.order.dto.res.GetOrdersDTO;
 import com.templates.springapiserver.order.dto.res.GetOrdersResDTO;
 import com.templates.springapiserver.order.service.OrderService;
 import java.util.List;
@@ -32,8 +33,9 @@ public class OrderController {
     }
 
     @GetMapping("/orders")
-    ResponseEntity<List<GetOrdersResDTO>> getOrders(@RequestParam Integer memberId) {
-        return ResponseEntity.ok(orderService.getOrders(memberId));
+    ResponseEntity<GetOrdersResDTO> getOrders(@RequestParam Integer memberId) {
+        List<GetOrdersDTO> orders = orderService.getOrders(memberId);
+        return ResponseEntity.ok(GetOrdersResDTO.of(orders));
     }
 
     @PostMapping("/order")

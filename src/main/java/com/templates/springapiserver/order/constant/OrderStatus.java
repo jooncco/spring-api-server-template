@@ -1,4 +1,4 @@
-package com.templates.springapiserver.constant;
+package com.templates.springapiserver.order.constant;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

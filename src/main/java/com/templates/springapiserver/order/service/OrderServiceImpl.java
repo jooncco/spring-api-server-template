@@ -5,7 +5,7 @@ import com.templates.springapiserver.order.dto.mapper.GetOrdersDTOMapper;
 import com.templates.springapiserver.order.dto.req.CreateOrderReqDTO;
 import com.templates.springapiserver.order.dto.req.UpdateOrderReqDTO;
 import com.templates.springapiserver.order.dto.res.GetOrderResDTO;
-import com.templates.springapiserver.order.dto.res.GetOrdersResDTO;
+import com.templates.springapiserver.order.dto.res.GetOrdersDTO;
 import com.templates.springapiserver.order.model.mybatis.Order;
 import com.templates.springapiserver.order.repository.mybatis.OrderRepository;
 import java.util.List;
@@ -35,7 +35,7 @@ public class OrderServiceImpl implements OrderService {
      * @return list of orders
      */
     @Override
-    public List<GetOrdersResDTO> getOrders(Integer memberId) {
+    public List<GetOrdersDTO> getOrders(Integer memberId) {
         List<Order> orders = orderRepository.getOrders(memberId);
         return orders.stream().map(getOrdersDTOMapper).toList();
     }

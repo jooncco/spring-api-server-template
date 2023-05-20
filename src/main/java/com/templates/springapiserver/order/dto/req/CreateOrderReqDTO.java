@@ -1,6 +1,6 @@
 package com.templates.springapiserver.order.dto.req;
 
-import com.templates.springapiserver.constant.OrderType;
+import com.templates.springapiserver.order.constant.OrderType;
 import java.util.List;
 import lombok.Getter;
 import lombok.ToString;

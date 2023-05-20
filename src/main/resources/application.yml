@@ -25,7 +25,7 @@ spring:
       enabled: always
 
 mybatis:
-  type-aliases-package: com.templates.springapiserver.**.model
+  type-aliases-package: com.templates.springapiserver.**.model.mybatis
   mapper-locations: classpath:sql/*.xml
   configuration:
     map-underscore-to-camel-case: true
@@ -51,4 +51,3 @@ logging:
       file-name-pattern: ${LOG_FILE}.%d{yyyy-MM-dd}-%i.log
   pattern:
     rolling-file-name: ${LOG_FILE}.%d{yyyy-MM-dd}-%i.log
-

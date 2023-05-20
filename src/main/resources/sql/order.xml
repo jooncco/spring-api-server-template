@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.templates.springapiserver.order.repository.OrderRepository">
+<mapper namespace="com.templates.springapiserver.order.repository.mybatis.OrderRepository">
     <select id="getOrder" parameterType="int" resultType="Order">
     <![CDATA[
         SELECT  ORDER_ID,
@@ -42,7 +42,7 @@
     ]]>
     </select>
 
-    <insert id="insertOrder" parameterType="Order">
+    <insert id="insertOrder" parameterType="Order" useGeneratedKeys="true" keyProperty="orderId">
         <![CDATA[
         INSERT INTO `ORDER` (MEMBER_ID, ORDER_NO, ORDER_TYPE_CODE, ORDER_STATUS_CODE, ITEM_TOTAL_AMOUNT,
                              DELIVERY_FEE_AMOUNT, ORDER_TOTAL_AMOUNT, CREATED_BY, UPDATED_BY)

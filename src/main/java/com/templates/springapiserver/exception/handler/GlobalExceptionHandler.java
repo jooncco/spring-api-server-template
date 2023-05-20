@@ -29,15 +29,13 @@ public class GlobalExceptionHandler {
         }
 
         return ErrorResponse.builder()
-            .error(ex.getClass().getName())
-            .msg(ex.getMessage())
-            .uri(uri)
-            .build();
+                .error(ex.getClass().getName())
+                .msg(ex.getMessage())
+                .uri(uri)
+                .build();
     }
 
-    @ExceptionHandler({
-        NoHandlerFoundException.class
-    })
+    @ExceptionHandler({NoHandlerFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     protected ErrorResponse notFoundError(Exception ex, HttpServletRequest request) {
         String uri = "NOT FOUND : ".concat(request.getRequestURI());
@@ -48,7 +46,6 @@ public class GlobalExceptionHandler {
                 .uri(uri)
                 .build();
     }
-
 
     @ExceptionHandler({Exception.class, BaseException.class})
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

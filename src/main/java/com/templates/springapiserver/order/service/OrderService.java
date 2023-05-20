@@ -1,19 +1,19 @@
 package com.templates.springapiserver.order.service;
 
-import com.templates.springapiserver.order.dto.req.CreateOrderDTO;
-import com.templates.springapiserver.order.dto.req.UpdateOrderDTO;
-import com.templates.springapiserver.order.dto.res.GetOrderDTO;
-import com.templates.springapiserver.order.dto.res.GetOrdersDTO;
+import com.templates.springapiserver.order.dto.req.CreateOrderReqDTO;
+import com.templates.springapiserver.order.dto.req.UpdateOrderReqDTO;
+import com.templates.springapiserver.order.dto.res.GetOrderResDTO;
+import com.templates.springapiserver.order.dto.res.GetOrdersResDTO;
 import java.util.List;
 
 public interface OrderService {
-    GetOrderDTO getOrder(Integer orderId);
+    GetOrderResDTO getOrder(Integer orderId);
 
-    List<GetOrdersDTO> getOrders(Integer memberId);
+    List<GetOrdersResDTO> getOrders(Integer memberId);
 
-    int createOrder(CreateOrderDTO createOrderDTO);
+    int createOrder(int memberId, CreateOrderReqDTO createOrderReqDTO);
 
-    int updateOrder(Integer orderId, UpdateOrderDTO orderDTO);
+    int updateOrder(Integer orderId, UpdateOrderReqDTO orderDTO);
 
     int deleteOrder(Integer orderId);
 }

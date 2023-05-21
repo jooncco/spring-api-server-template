@@ -6,8 +6,6 @@ import lombok.ToString;
 @Getter
 @ToString
 public class UpdateOrderReqDTO {
-    private int memberId;
-    private int orderNo;
     private String type;
     private String status;
     private int itemsTotal;

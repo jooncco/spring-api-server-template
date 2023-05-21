@@ -2,10 +2,7 @@ package com.templates.springapiserver.order.controller;
 
 import com.templates.springapiserver.order.dto.req.CreateOrderReqDTO;
 import com.templates.springapiserver.order.dto.req.UpdateOrderReqDTO;
-import com.templates.springapiserver.order.dto.res.CreateOrderResDTO;
-import com.templates.springapiserver.order.dto.res.GetOrderResDTO;
-import com.templates.springapiserver.order.dto.res.GetOrdersDTO;
-import com.templates.springapiserver.order.dto.res.GetOrdersResDTO;
+import com.templates.springapiserver.order.dto.res.*;
 import com.templates.springapiserver.order.service.OrderService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -48,13 +45,23 @@ public class OrderController {
     }
 
     @PutMapping("/order/{id}")
-    ResponseEntity<Integer> updateOrder(
-            @PathVariable Integer id, @RequestBody UpdateOrderReqDTO orderDTO) {
-        return ResponseEntity.ok(orderService.updateOrder(id, orderDTO));
+    ResponseEntity<String> updateOrder(
+            @PathVariable Integer id, @RequestBody UpdateOrderReqDTO updateOrderReqDTO) {
+        int memberId = 0; // TODO: Extract memberId from session info
+
+        orderService.updateOrder(memberId, id, updateOrderReqDTO);
+
+        return ResponseEntity.ok(null);
     }
 
     @DeleteMapping("/order/{id}")
-    ResponseEntity<Integer> deleteOrder(@PathVariable Integer id) {
-        return ResponseEntity.ok(orderService.deleteOrder(id));
+    ResponseEntity<String> deleteOrder(@PathVariable Integer id) {
+        // TODO: 준꼬님, delete하면 entity가 삭제되어 reponseStatus code 204로 설정하였는데,
+        //  삭제가 상태 변경이 되면, 상태가 변경된 해당 entity를 반환하도록 변경하겠습니다!
+        //  예를 들어 delete가 cancel을 의미할 수 있다고 생각되어서요!
+
+        orderService.deleteOrder(id);
+
+        return ResponseEntity.noContent().build();
     }
 }

@@ -67,9 +67,7 @@
     <update id="updateOrder" parameterType="Order">
         <![CDATA[
         UPDATE `ORDER`
-           SET MEMBER_ID=#{memberId},
-               ORDER_NO=#{orderNo},
-               ORDER_TYPE_CODE=#{orderTypeCode},
+           SET ORDER_TYPE_CODE=#{orderTypeCode},
                ORDER_STATUS_CODE=#{orderStatusCode},
                ITEM_TOTAL_AMOUNT=#{itemTotalAmount},
                DELIVERY_FEE_AMOUNT=#{deliveryFeeAmount},

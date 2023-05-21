@@ -13,7 +13,7 @@ public interface OrderService {
 
     int createOrder(int memberId, CreateOrderReqDTO createOrderReqDTO);
 
-    int updateOrder(Integer orderId, UpdateOrderReqDTO orderDTO);
+    int updateOrder(int memberId, Integer orderId, UpdateOrderReqDTO orderDTO);
 
     int deleteOrder(Integer orderId);
 }

@@ -3,6 +3,7 @@ package com.templates.springapiserver.order.model.mybatis;
 import com.templates.springapiserver.model.BaseModel;
 import com.templates.springapiserver.order.constant.OrderStatus;
 import com.templates.springapiserver.order.dto.req.CreateOrderReqDTO;
+import com.templates.springapiserver.order.dto.req.UpdateOrderReqDTO;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -52,5 +53,21 @@ public final class Order extends BaseModel {
                 .deliveryFeeAmount(createOrderReqDTO.getDeliveryFee())
                 .orderTotalAmount(createOrderReqDTO.getOrderTotal())
                 .build();
+    }
+
+    public static Order update(Integer memberId, Integer orderId, UpdateOrderReqDTO updateOrderReqDTO) {
+        Order order = Order.builder()
+                .orderId(orderId)
+                .memberId(memberId)
+                .orderTypeCode(updateOrderReqDTO.getType())
+                .orderStatusCode(updateOrderReqDTO.getStatus())
+                .itemTotalAmount(updateOrderReqDTO.getItemsTotal())
+                .deliveryFeeAmount(updateOrderReqDTO.getDeliveryFee())
+                .orderTotalAmount(updateOrderReqDTO.getOrderTotal())
+                .build();
+
+        order.updateModel(memberId);
+
+        return order;
     }
 }

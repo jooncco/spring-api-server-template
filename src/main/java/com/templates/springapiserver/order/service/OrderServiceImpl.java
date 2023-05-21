@@ -58,21 +58,29 @@ public class OrderServiceImpl implements OrderService {
         return order.getOrderId();
     }
 
+    /**
+     * update single order entity
+     *
+     * @param memberId
+     * @param orderId
+     * @param updateOrderReqDTO
+     * @return 1 - success(updated order count), 0 - fail
+     */
     @Override
-    public int updateOrder(Integer orderId, UpdateOrderReqDTO updateOrderReqDTO) {
-        // TODO: to 조던님
-        // order 데이터를 조회해서 업데이트하는 방식을 DB 커넥션을 두번 만들게 되니, orderId 를 where 절에 넣어서
-        // 해당 rows 를 바로 업데이트 하도록 해서 DB 커넥션 한번으로 하면 더 좋을것 같아요.
-        // UpdateOrderReqDTO 에도 변경 대상만 담도록 API 를 설계해 보세요 ㅎㅎ
-        //        Order order =
-        // orderRepository.getOrder(orderId).orElseThrow(NoSuchElementException::new);
-        //        orderRepository.updateOrder(order);
-        return 0;
+    public int updateOrder(int memberId, Integer orderId, UpdateOrderReqDTO updateOrderReqDTO) {
+        Order order = Order.update(memberId, orderId, updateOrderReqDTO);
+
+        return orderRepository.updateOrder(order);
     }
 
+    /**
+     * delete single order entity
+     *
+     * @param orderId
+     * @return 1 - success(deleted row count), 0 - fail
+     */
     @Override
     public int deleteOrder(Integer orderId) {
-        // TODO: delete
         return orderRepository.deleteOrder(orderId);
     }
 }

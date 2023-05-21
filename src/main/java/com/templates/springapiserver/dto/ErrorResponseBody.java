@@ -7,10 +7,9 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class ErrorResponse {
+@JsonInclude(Include.NON_NULL)
+public class ErrorResponseBody {
     private String error;
-    private String msg;
-
-    @JsonInclude(Include.NON_NULL)
+    private String message;
     private String uri;
 }

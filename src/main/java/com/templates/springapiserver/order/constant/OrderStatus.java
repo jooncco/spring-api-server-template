@@ -1,5 +1,6 @@
 package com.templates.springapiserver.order.constant;
 
+import java.util.List;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -15,4 +16,8 @@ public enum OrderStatus {
 
     private final String code;
     private final String description;
+
+    public static boolean isCancelable(String orderStatus) {
+        return List.of(CREATED, HOLDING, PAID).contains(OrderStatus.valueOf(orderStatus));
+    }
 }

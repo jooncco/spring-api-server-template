@@ -25,7 +25,7 @@ spring:
       enabled: always
 
 mybatis:
-  type-aliases-package: com.templates.springapiserver.**.model.mybatis
+  type-aliases-package: com.templates.springapiserver.**.model
   mapper-locations: classpath:sql/*.xml
   configuration:
     map-underscore-to-camel-case: true

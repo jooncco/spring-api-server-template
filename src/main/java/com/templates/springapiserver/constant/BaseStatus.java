@@ -7,7 +7,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum BaseStatus {
     OK(200, "OK", "OK"),
-    INVALID_REQUIRED_HEADER(401, "INVALID_REQUEST_HEADERS", "Invalid request headers"),
+    BAD_REQUEST(400, "BAD_REQUEST", "Bad request"),
+    INVALID_REQUEST_PARAMETER(400, "INVALID_REQUEST_PARAMETER", "Invalid request parameter"),
+    UNAUTHORIZED(401, "UNAUTHORIZED", "Unauthorized"),
+    FORBIDDEN(403, "FORBIDDEN", "Forbidden"),
+    NOT_ACCEPTABLE(406, "NOT_ACCEPTABLE", "Not Acceptable"),
+    INVALID_REQUEST_HEADER(412, "INVALID_REQUEST_HEADER", "Invalid request header"),
     UNKNOWN_ERROR(500, "UNKNOWN_ERROR", "Unknown error");
 
     private final Integer status;

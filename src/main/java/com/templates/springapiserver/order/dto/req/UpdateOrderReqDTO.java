@@ -1,15 +1,23 @@
 package com.templates.springapiserver.order.dto.req;
 
+import com.templates.springapiserver.order.constant.OrderType;
+import java.util.List;
 import lombok.Getter;
 import lombok.ToString;
 
 @Getter
 @ToString
 public class UpdateOrderReqDTO {
-    private String type;
-    private String status;
+    private OrderType type;
+    private List<Item> items;
     private int itemsTotal;
     private int deliveryFee;
     private int orderTotal;
-    private Integer updatedBy;
+
+    @Getter
+    @ToString
+    private static class Item {
+        private Integer itemId;
+        private Integer quantity;
+    }
 }

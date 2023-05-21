@@ -1,18 +1,24 @@
 package com.templates.springapiserver.order.service;
 
+import static com.templates.springapiserver.constant.CommonConstants.DEFAULT_SERVER_ZONE_OFFSET;
+
+import com.templates.springapiserver.constant.BaseStatus;
+import com.templates.springapiserver.exception.BaseException;
+import com.templates.springapiserver.order.constant.OrderStatus;
 import com.templates.springapiserver.order.dto.mapper.GetOrderDTOMapper;
 import com.templates.springapiserver.order.dto.mapper.GetOrdersDTOMapper;
 import com.templates.springapiserver.order.dto.req.CreateOrderReqDTO;
 import com.templates.springapiserver.order.dto.req.UpdateOrderReqDTO;
-import com.templates.springapiserver.order.dto.res.GetOrderResDTO;
+import com.templates.springapiserver.order.dto.res.GetOrderDTO;
 import com.templates.springapiserver.order.dto.res.GetOrdersDTO;
-import com.templates.springapiserver.order.model.mybatis.Order;
-import com.templates.springapiserver.order.repository.mybatis.OrderRepository;
+import com.templates.springapiserver.order.model.Order;
+import com.templates.springapiserver.order.repository.OrderRepository;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.NoSuchElementException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+/** OrderService implementation */
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
@@ -22,10 +28,15 @@ public class OrderServiceImpl implements OrderService {
     private final GetOrdersDTOMapper getOrdersDTOMapper;
     private final GetOrderDTOMapper getOrderDTOMapper;
 
+    /**
+     * Get order specified by given orderId.
+     *
+     * @param orderId
+     * @return order details
+     */
     @Override
-    public GetOrderResDTO getOrder(Integer orderId) {
-        return getOrderDTOMapper.apply(
-                orderRepository.getOrder(orderId).orElseThrow(NoSuchElementException::new));
+    public GetOrderDTO getOrder(Integer orderId) {
+        return getOrderDTOMapper.apply(orderRepository.getOrder(orderId).orElse(null));
     }
 
     /**
@@ -49,9 +60,11 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public int createOrder(int memberId, CreateOrderReqDTO createOrderReqDTO) {
 
-        Order order = Order.from(memberId, createOrderReqDTO);
+        // Insert into ORDER_ITEM table. (Omitted. This is just a template.)
 
-        int orderNo = 0; // TODO: 가게 오픈시마다 초기화되는 주문번호 채번 로직. OrderNoUtility 내부에 구현
+        Order order = Order.from(memberId, createOrderReqDTO);
+        // Generate orderNo. (Omitted. This is just a template.)
+        int orderNo = 0;
         order.setOrderNo(orderNo);
 
         orderRepository.insertOrder(order);
@@ -59,28 +72,70 @@ public class OrderServiceImpl implements OrderService {
     }
 
     /**
-     * update single order entity
+     * Update single order entity. It updates order type and amounts.
      *
      * @param memberId
      * @param orderId
      * @param updateOrderReqDTO
-     * @return 1 - success(updated order count), 0 - fail
+     * @return orderId if success
+     * @throws BaseException
      */
     @Override
-    public int updateOrder(int memberId, Integer orderId, UpdateOrderReqDTO updateOrderReqDTO) {
-        Order order = Order.update(memberId, orderId, updateOrderReqDTO);
+    public void updateOrderTypeAndAmounts(
+            int memberId, Integer orderId, UpdateOrderReqDTO updateOrderReqDTO)
+            throws BaseException {
 
-        return orderRepository.updateOrder(order);
+        // Update ORDER_ITEM table. (Omitted. This is just a template.)
+
+        int updatedRows =
+                orderRepository.updateOrderTypeAndAmounts(
+                        orderId,
+                        updateOrderReqDTO.getType().getCode(),
+                        updateOrderReqDTO.getItemsTotal(),
+                        updateOrderReqDTO.getDeliveryFee(),
+                        updateOrderReqDTO.getOrderTotal(),
+                        memberId,
+                        LocalDateTime.now(DEFAULT_SERVER_ZONE_OFFSET));
+        if (updatedRows == 0) {
+            throw BaseException.of(BaseStatus.BAD_REQUEST, "No such order with given orderId.");
+        }
+        if (updatedRows != 1) {
+            throw BaseException.of(BaseStatus.UNKNOWN_ERROR);
+        }
     }
 
     /**
-     * delete single order entity
+     * Cancel single order entity
      *
+     * @param memberId
      * @param orderId
-     * @return 1 - success(deleted row count), 0 - fail
+     * @throws BaseException
      */
     @Override
-    public int deleteOrder(Integer orderId) {
-        return orderRepository.deleteOrder(orderId);
+    public void cancelOrder(int memberId, Integer orderId) throws BaseException {
+        Order targetOrder =
+                orderRepository
+                        .getOrder(orderId)
+                        .orElseThrow(
+                                () ->
+                                        BaseException.of(
+                                                BaseStatus.BAD_REQUEST,
+                                                "No such order with given orderId."));
+
+        // Check if order is in cancelable state.
+        if (!OrderStatus.isCancelable(targetOrder.getOrderStatusCode())) {
+            throw BaseException.of(
+                    BaseStatus.NOT_ACCEPTABLE,
+                    String.format(
+                            "This order can not be canceled. Status: %s",
+                            targetOrder.getOrderStatusCode()));
+        }
+
+        int updatedRows =
+                orderRepository.updateOrderStatus(
+                        orderId, OrderStatus.CANCELED, memberId, LocalDateTime.now());
+        if (updatedRows != 1) {
+            throw BaseException.of(BaseStatus.UNKNOWN_ERROR);
+        }
     }
 }

@@ -1,7 +1,7 @@
 package com.templates.springapiserver.order.dto.mapper;
 
 import com.templates.springapiserver.order.dto.res.GetOrdersDTO;
-import com.templates.springapiserver.order.model.mybatis.Order;
+import com.templates.springapiserver.order.model.Order;
 import java.util.function.Function;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +10,7 @@ public class GetOrdersDTOMapper implements Function<Order, GetOrdersDTO> {
 
     @Override
     public GetOrdersDTO apply(Order order) {
+        if (order == null) return null;
         return GetOrdersDTO.builder()
                 .memberId(order.getMemberId())
                 .orderNo(order.getOrderNo())

@@ -2,7 +2,7 @@ package com.templates.springapiserver.filter;
 
 import com.google.gson.Gson;
 import com.templates.springapiserver.constant.BaseStatus;
-import com.templates.springapiserver.dto.ErrorResponse;
+import com.templates.springapiserver.dto.ErrorResponseBody;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.List;
@@ -11,6 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 @Slf4j
@@ -27,7 +29,7 @@ public class BaseFilter extends OncePerRequestFilter {
         log.info("==========BaseFilter 시작!==========");
 
         // 필수 헤더
-        List<String> requiredHeaders = List.of("Content-Type");
+        List<String> requiredHeaders = List.of(HttpHeaders.CONTENT_TYPE);
         boolean valid =
                 requiredHeaders.stream()
                         .allMatch(
@@ -43,7 +45,7 @@ public class BaseFilter extends OncePerRequestFilter {
                                 });
         if (!valid) {
             log.info("==========필수 헤더 검증에 실패하여 요청 차단!==========");
-            setErrorResponse(BaseStatus.INVALID_REQUIRED_HEADER, response);
+            setErrorResponse(BaseStatus.INVALID_REQUEST_HEADER, response);
             return;
         }
 
@@ -54,15 +56,15 @@ public class BaseFilter extends OncePerRequestFilter {
 
     private void setErrorResponse(BaseStatus baseStatus, HttpServletResponse response) {
         response.setStatus(baseStatus.getStatus());
-        response.setContentType("application/json");
-        ErrorResponse errorResponse =
-                ErrorResponse.builder()
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        ErrorResponseBody errorResponseBody =
+                ErrorResponseBody.builder()
                         .error(baseStatus.getCode())
-                        .msg(baseStatus.getMessage())
+                        .message(baseStatus.getMessage())
                         .build();
         try {
             Gson gson = new Gson();
-            String json = gson.toJson(errorResponse);
+            String json = gson.toJson(errorResponseBody);
             response.getWriter().write(json);
         } catch (IOException e) {
             e.printStackTrace();

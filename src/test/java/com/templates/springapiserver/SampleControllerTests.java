@@ -17,7 +17,7 @@ class SampleControllerTests {
 
     @Autowired MockMvc mockMvc;
 
-    @DisplayName("/api/client-info, API 정상 호출")
+    @DisplayName("/api/client-info success")
     @Test
     void apiTestController_api_success() throws Exception {
         mockMvc.perform(get("/api/client-info").header("Content-Type", "application/json"))
@@ -25,7 +25,7 @@ class SampleControllerTests {
                 .andExpect(content().string("{\"clientIP\":\"127.0.0.1\"}"));
     }
 
-    @DisplayName("/api/client-info, 필수 헤더 누락시, 401 발생")
+    @DisplayName("/api/client-info, 401 error")
     @Test
     void apiTestController_api_fail() throws Exception {
         mockMvc.perform(get("/api/client-info")).andExpect(status().is4xxClientError());

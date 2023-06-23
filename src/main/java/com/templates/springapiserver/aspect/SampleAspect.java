@@ -12,15 +12,13 @@ import org.springframework.stereotype.Component;
 public class SampleAspect {
 
     @Around("execution(* com.templates.springapiserver..*.HealthController.*(..))")
-    public Object callTest(ProceedingJoinPoint pjp) throws Throwable {
-        log.info("<--- TestClass:callTest");
-        Object retVal = pjp.proceed(); // 메서드 호출 자체를 감쌈
+    public Object aroundMethod(ProceedingJoinPoint pjp) throws Throwable {
+        Object retVal = pjp.proceed();
         try {
             log.info((String) retVal);
         } catch (Exception e) {
             log.info("model");
         }
-        log.info("TestClass:callTest -->");
         return retVal;
     }
 }

@@ -18,17 +18,11 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @Slf4j
 public class BaseFilter extends OncePerRequestFilter {
 
-    /*
-    여기에서 dispatcherServlet 으로 전달하기 전/후 에 대해 request 와 response 제어가 가능하다.
-    예) request 의 header 에서 필수 헤더가 없는 경우 요청을 차단할 수 있다.
-     */
     @Override
     protected void doFilterInternal(
             HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        log.info("==========BaseFilter 시작!==========");
 
-        // 필수 헤더
         List<String> requiredHeaders = List.of(HttpHeaders.CONTENT_TYPE);
         boolean valid =
                 requiredHeaders.stream()
@@ -44,14 +38,10 @@ public class BaseFilter extends OncePerRequestFilter {
                                     return false;
                                 });
         if (!valid) {
-            log.info("==========필수 헤더 검증에 실패하여 요청 차단!==========");
             setErrorResponse(BaseStatus.INVALID_REQUEST_HEADER, response);
             return;
         }
-
         filterChain.doFilter(request, response);
-
-        log.info("==========BaseFilter 종료!==========");
     }
 
     private void setErrorResponse(BaseStatus baseStatus, HttpServletResponse response) {
